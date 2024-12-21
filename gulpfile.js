@@ -9,7 +9,7 @@ const stripCss = require('gulp-strip-css-comments')
 
 function tarefasCSS(cb) {
 
-    return gulp.src([
+          gulp.src([
             './node_modules/bootstrap/dist/css/bootstrap.css',
             './node_modules/@fortawesome/fontawesome-free/css/fontawesome.css',
             './vendor/owl/css/owl.css',
@@ -22,11 +22,13 @@ function tarefasCSS(cb) {
         .pipe(rename({ suffix: '.min'}))    // styles.min.css
         .pipe(gulp.dest('./dist/css'))      // cria arquivo em novo diretório
 
+        cb()
+
 }
 
-function tarefasJS(){
+function tarefasJS(cb){
 
-    return gulp.src([
+     gulp.src([
             './node_modules/jquery/dist/jquery.js',
             './node_modules/bootstrap/dist/js/bootstrap.js',
             './vendor/owl/js/owl.js',
@@ -39,6 +41,8 @@ function tarefasJS(){
         .pipe(uglify())                     // minifica js
         .pipe(rename({ suffix: '.min'}))    // scripts.min.js
         .pipe(gulp.dest('./dist/js'))       // cria arquivo em novo diretório
+
+        cb()
 }
 
 
@@ -59,6 +63,19 @@ function tarefasImagem(){
         .pipe(gulp.dest('./dist/images'))
 }
 
+function TarefasHTML(cb){
+
+    gulp.src('./src/**/*.html')
+    .pipe(htmlmin({ collapseWhitespace: true }))
+    .pipe(gulp.dest('./dist'))
+
+
+    return cb()
+}
+
+
+
 exports.styles = tarefasCSS
 exports.scripts = tarefasJS
 exports.images = tarefasImagem
+exports.default = gulp.series( TarefasHTML, tarefasCSS, tarefasJS, )
