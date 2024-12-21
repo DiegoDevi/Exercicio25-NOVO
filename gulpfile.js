@@ -85,9 +85,11 @@ gulp.task('serve', function(){
 
     browserSync.init({
         server: {
-            baseDir: "./src"
+            baseDir: "./dist"
         }
     })
+
+    gulp.watch(' ./dist/**/*')
 })
 
 exports.styles = tarefasCSS
