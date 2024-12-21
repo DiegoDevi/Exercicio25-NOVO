@@ -89,7 +89,7 @@ gulp.task('serve', function(){
         }
     })
 
-    gulp.watch(' ./dist/**/*')
+    gulp.watch(' ./dist/**/*').on('change', reload)
 })
 
 exports.styles = tarefasCSS
