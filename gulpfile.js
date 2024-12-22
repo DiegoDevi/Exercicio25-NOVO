@@ -89,10 +89,19 @@ gulp.task('serve', function(){
         }
     })
 
-    gulp.watch(' ./dist/**/*').on('change', reload)
+    gulp.watch(' ./src/**/*').on('change', process)
+    gulp.watch(' ./src/**/*').on('change', reload)
+  
 })
+
+function end(cb){
+    console.log("Tarefas Concluidas")
+    return cb()
+}
+
+const process = gulp.series( TarefasHTML, tarefasCSS, tarefasJS, end )
 
 exports.styles = tarefasCSS
 exports.scripts = tarefasJS
 exports.images = tarefasImagem
-exports.default = gulp.series( TarefasHTML, tarefasCSS, tarefasJS, )
+exports.default = process
