@@ -8,7 +8,7 @@ const stripJs = require('gulp-strip-comments')
 const stripCss = require('gulp-strip-css-comments')
 const htmlmin = require('gulp-htmlmin')
 const babel = require('gulp-babel')
-const browserSync = require('gulp-browser-sync').create()
+const browserSync = require('browser-sync').create()
 const reload = browserSync.reload
 
 function tarefasCSS(cb) {
